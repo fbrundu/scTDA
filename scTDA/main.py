@@ -1191,7 +1191,8 @@ class UnrootedGraph(object):
         return numpy.array(mat)
 
     def draw(self, color, connected=True, labels=False, ccmap='jet', weight=8.0, save='', ignore_log=False,
-             table=False, axis=[], a=0.4, dpi=None, figsize=None, lw=1.0, title=None, title_font='Arial'):
+             table=False, axis=[], a=0.4, dpi=None, figsize=None, lw=1.0, title=None,
+             font_props={'fontname': 'Arial'}):
         """
         Displays topological representation of the data colored according to the expression of a gene, genes or
         list of genes, specified by argument 'color'. This can be a gene or a list of one, two or three genes or lists
@@ -1338,7 +1339,7 @@ class UnrootedGraph(object):
                 the_table.scale(1.787, 1)
                 pylab.subplots_adjust(bottom=0.2)
         if title is not None:
-            plt.title(title, title_font)
+            plt.title(title, **font_props)
         if len(axis) == 4:
             pylab.axis(axis)
         if save == '':
