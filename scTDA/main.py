@@ -43,6 +43,11 @@ pylab.rcParams['patch.facecolor'] = 'k'
 GLOBAL METHODS
 """
 
+def _remove_frame(ax):
+    plt.setp(ax.spines.values(), linewidth=0)
+    ax.set_xticks([])
+    ax.set_yticks([])
+
 
 def ParseAyasdiGraph(name, source, lab, user, password):
     """
@@ -1192,7 +1197,7 @@ class UnrootedGraph(object):
 
     def draw(self, color, connected=True, labels=False, ccmap='jet', weight=8.0, save='', ignore_log=False,
              table=False, axis=[], a=0.4, dpi=None, figsize=None, lw=1.0, title=None,
-             font_props={'fontname': 'Arial'}):
+             font_props={'fontname': 'Arial'}, remove_frame=False):
         """
         Displays topological representation of the data colored according to the expression of a gene, genes or
         list of genes, specified by argument 'color'. This can be a gene or a list of one, two or three genes or lists
@@ -1340,6 +1345,8 @@ class UnrootedGraph(object):
                 pylab.subplots_adjust(bottom=0.2)
         if title is not None:
             plt.title(title, **font_props)
+        if remove_frame:
+            _remove_frame(plt.gca())
         if len(axis) == 4:
             pylab.axis(axis)
         if save == '':
